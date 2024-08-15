@@ -189,7 +189,7 @@ def main():
     # Add arguments
     parser.add_argument("-c", "--create-template", type=str, help="Create the template with name.")
     parser.add_argument("-u", "--update-version", type=str, help="Update your package version.")
-    parser.add_argument("-v", "--version", action="version", version="pkg_template 0.1.2")
+    parser.add_argument("-v", "--version", action="version", version="pkg_template 0.1.7")
     parser.add_argument("-f", "--force", action="store_true", help="Use with --update-version to skip confirmation prompt.")
     parser.add_argument("-p", "--path", type=str, default=os.getcwd(), help="Path to the setup.py file (default is current directory).")
     parser.add_argument("-d", "--create-django-project", type=str, help="Create the django template")
