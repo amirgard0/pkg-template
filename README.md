@@ -12,7 +12,7 @@ its a simple cli program developed by amirgard0.
 
 - > pkg-template -u \<version>
 - you can add path to it
-- - > pkg-template -p \<paht> -u \<version>
+- - > pkg-template -p \<path> -u \<version>
 
 3. it create a django template
 
