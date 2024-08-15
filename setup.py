@@ -18,10 +18,10 @@ setup(
     ],
     author="amirgard",
     author_email="",
-    description="",
+    description="a template maker",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url="",
+    url="https://github.com/amirgard0/pkg-template",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
