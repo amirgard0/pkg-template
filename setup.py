@@ -14,7 +14,7 @@ setup(
         ],
     },
     install_requires=[
-        # 'requests',
+        'django',
     ],
     author="amirgard",
     author_email="",
