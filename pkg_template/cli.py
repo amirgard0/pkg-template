@@ -93,15 +93,15 @@ def django_create_template(template_name: str):
     subprocess.run(f"cd {template_name}")
     
     # Step 2: Change the working directory to the project directory
-    # project_path = os.path.join(os.getcwd(), template_name)
-    os.chdir(os.getcwd())
-    with open(os.path.join(os.getcwd(), template_name, "urls.py"), "r+") as f:
+    project_path = os.path.join(os.getcwd(), template_name)
+    os.chdir(project_path)
+    with open(os.path.join(project_path, template_name, "urls.py"), "r+") as f:
         file_text = f.read()
         file_text = file_text.replace("from django.urls import path", "from django.urls import path, include")
         f.seek(0)
         f.write(file_text)
         f.truncate()
-def create_app(app_name: str, project_path=os.getcwd()):
+def create_app(app_name: str, project_path):
     main_path = os.path.join(project_path, app_name)
     os.makedirs(main_path, exist_ok=True)
     
@@ -191,12 +191,12 @@ def get_classed_name(string: str):
     return result
 
 def main():
-    parser = argparse.ArgumentParser(description="Create a PyPI package template or update the version.")
+    parser = argparse.ArgumentParser(description="Create a PyPI|django package template or update the version.")
     
     # Add arguments
     parser.add_argument("-c", "--create-template", type=str, help="Create the template with name.")
     parser.add_argument("-u", "--update-version", type=str, help="Update your package version.")
-    parser.add_argument("-v", "--version", action="version", version="pkg_template 0.1.7")
+    parser.add_argument("-v", "--version", action="version", version="pkg_template 0.1.8")
     parser.add_argument("-f", "--force", action="store_true", help="Use with --update-version to skip confirmation prompt.")
     parser.add_argument("-p", "--path", type=str, default=os.getcwd(), help="Path to the setup.py file (default is current directory).")
     parser.add_argument("-d", "--create-django-project", type=str, help="Create the django template")
@@ -221,8 +221,10 @@ def main():
         django_create_template(args.create_django_project)
     
     elif args.create_django_app:
-        create_app(app_name=args.create_django_app, project_path=args.path)    
-    
+        if os.path.exists(os.path.join(args.path, "manage.py")):
+            create_app(app_name=args.create_django_app, project_path=args.path)    
+        else:
+            print("you have to be in the project folder (that you can see manage.py)")
     else:
         parser.print_help()
 
