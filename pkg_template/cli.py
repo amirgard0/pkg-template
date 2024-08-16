@@ -120,6 +120,10 @@ def create_app(app_name: str, project_path=os.getcwd()):
         urls_path = os.path.join(project_path, project_path.split("\\")[-1], "urls.py")
         app_app_path = os.path.join(project_path, app_name, "apps.py")
         
+        #create templates/appName
+        templates_appName = os.path.join(project_path, app_name, "templates", app_name)
+        os.makedirs(templates_appName, exist_ok=True)
+        
         # config the app class in apps.py
         with open(app_app_path, "r+") as f:
             file_text = f.read()
@@ -129,6 +133,7 @@ def create_app(app_name: str, project_path=os.getcwd()):
             f.seek(0)
             f.write(file_text)
             f.truncate()
+        
         # config the app in settings.py
         with open(settings_path, "r+") as f:
             # Read the entire file content
@@ -162,6 +167,7 @@ def create_app(app_name: str, project_path=os.getcwd()):
             f.seek(0)
             f.write(file_text)
             f.truncate() 
+        
         # config the app in urls.py
         with open(urls_path, "r+") as f:
             file_text = f.read()
@@ -171,6 +177,7 @@ def create_app(app_name: str, project_path=os.getcwd()):
             f.seek(0)
             f.write(file_text)
             f.truncate()
+        
     else:
         print(f"The directory {data_path} does not exist.")
 
@@ -214,7 +221,7 @@ def main():
         django_create_template(args.create_django_project)
     
     elif args.create_django_app:
-        create_app(app_name=args.create_django_app, project_path=args.path)
+        create_app(app_name=args.create_django_app, project_path=args.path)    
     
     else:
         parser.print_help()
